@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keuangan</title>
+<link rel="stylesheet" href="keuangan.css">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- Sidebar -->
+<aside class="sidebar">
+
+<div class="logo">
+GLOSS.ID <span>★</span>
+</div>
+
+<button class="menu" onclick="goDashboard()">
+Dashboard
+</button>
+
+<button class="menu" onclick="goData()">
+Data
+</button>
+
+<button class="menu active" onclick="goKeuangan()">
+Keuangan
+</button>
+
+<button class="menu" onclick="goTransaksi()">
+Transaksi
+</button>
+
+<button class="menu" onclick="goLaporan()">
+Laporan
+</button>
+
+</aside>
+
+<!-- Content -->
+<main class="content">
+
+<div class="topbar">
+<button class="logout">logout</button>
+</div>
+
+<h1>Keuangan</h1>
+
+<!-- tombol -->
+<div class="tools">
+<button onclick="bukaPopup()">Tambah</button>
+</div>
+
+<!-- tabel -->
+<table>
+
+<thead>
+<tr>
+<th>Nama Barang</th>
+<th>Jumlah</th>
+<th>Harga</th>
+<th>Total</th>
+</tr>
+</thead>
+
+<tbody id="tbody"></tbody>
+
+</table>
+
+</main>
+
+</div>
+
+<!-- popup -->
+<div class="popup" id="popup">
+
+<div class="popup-box">
+
+<h2>Tambah Data</h2>
+
+<input type="text" id="namaBarang" placeholder="Nama Barang">
+<input type="number" id="jumlahBarang" placeholder="Jumlah">
+<input type="number" id="hargaBarang" placeholder="Harga">
+
+<div class="popup-btn">
+<button onclick="simpanData()">Simpan</button>
+<button onclick="tutupPopup()">Batal</button>
+</div>
+
+</div>
+
+</div>
+
+<script src="keuangan.js"></script>
+</body>
+</html>

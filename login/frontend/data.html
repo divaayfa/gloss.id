@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Barang</title>
+<link rel="stylesheet" href="data.css">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+   <!-- Sidebar -->
+<aside class="sidebar">
+
+<div class="logo">
+GLOSS.ID <span>★</span>
+</div>
+
+<button class="menu" onclick="goDashboard()">
+Dashboard
+</button>
+
+<button class="menu active" onclick="goData()">
+Data
+</button>
+
+<button class="menu" onclick="goKeuangan()">
+Keuangan
+</button>
+
+<button class="menu" onclick="goTransaksi()">
+Transaksi
+</button>
+
+<button class="menu" onclick="goLaporan()">
+Laporan
+</button>
+
+</aside>
+
+    <!-- Content -->
+    <main class="content">
+
+        <div class="topbar">
+            <button class="logout">logout</button>
+        </div>
+
+        <h1>Data Barang</h1>
+
+        <!-- Toolbar -->
+        <div class="tools">
+
+            <input type="text" id="search" placeholder="Search...">
+
+            <button onclick="searchBarang()">Search</button>
+
+            <button onclick="bukaPopup()">Tambah</button>
+
+        </div>
+
+        <!-- Table -->
+        <table>
+
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Barang</th>
+                    <th>Harga</th>
+                    <th>Stok</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            <tbody id="tbody"></tbody>
+
+        </table>
+
+    </main>
+
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+
+    <div class="popup-box">
+
+        <h2>Tambah Barang</h2>
+
+        <input type="number" id="idBarang" placeholder="No">
+        <input type="text" id="namaBarang" placeholder="Nama Barang">
+        <input type="number" id="hargaBarang" placeholder="Harga">
+        <input type="number" id="stokBarang" placeholder="Stok">
+
+        <div class="popup-btn">
+
+            <button onclick="simpanBarang()">Simpan</button>
+
+            <button onclick="tutupPopup()">Batal</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="data.js"></script>
+</body>
+</html>

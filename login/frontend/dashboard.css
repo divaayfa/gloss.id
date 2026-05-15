@@ -1,0 +1,209 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial;
+  background: #f1f1f1;
+}
+
+/* Layout */
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  background: gray;
+  padding: 15px;
+}
+
+.logo {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.menu {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 6px;
+  text-align: left;
+  background: white;
+  cursor: pointer;
+}
+
+.menu:hover {
+  transform: scale(1.02);
+}
+
+.active {
+  background: transparent;
+  font-weight: bold;
+}
+
+/* Main */
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.topbar {
+  text-align: right;
+}
+
+.logout {
+  padding: 8px 14px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
+h1 {
+  margin: 20px 0;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  height: 250px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* tulisan bawah */
+.card h2 {
+  margin-top: 30px;
+}
+
+/* icon dasar */
+.icon {
+  width: 90px;
+  height: 90px;
+  background: black;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+/* DATA = modern folder/file */
+.box {
+  width: 90px;
+  height: 62px;
+  background: black;
+  border-radius: 10px;
+  position: relative;
+  margin-top: 12px;
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  width: 38px;
+  height: 14px;
+  background: black;
+  top: -12px;
+  left: 8px;
+  border-radius: 8px 8px 0 0;
+}
+
+.box::after {
+  content: "";
+  position: absolute;
+  width: 55px;
+  height: 4px;
+  background: white;
+  top: 18px;
+  left: 18px;
+  box-shadow:
+    0 12px white,
+    0 24px white;
+}
+
+/* KEUANGAN = dompet */
+.wallet {
+  width: 95px;
+  height: 60px;
+  border-radius: 8px;
+}
+
+.wallet::before {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 18px;
+  background: white;
+  right: 8px;
+  top: 20px;
+}
+
+/* TRANSAKSI = 2 orang + uang tengah */
+.cart {
+  width: 90px;
+  height: 70px;
+  background: transparent;
+}
+
+.cart::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: black;
+  left: 10px;
+  top: 0;
+  box-shadow: 52px 0 black;
+}
+
+.cart::after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 55px;
+  left: 0;
+  top: 18px;
+  background:
+    radial-gradient(circle at 18px 18px, black 0 10px, transparent 11px),
+    radial-gradient(circle at 72px 18px, black 0 10px, transparent 11px),
+    linear-gradient(black, black) left 12px top 22px / 16px 24px no-repeat,
+    linear-gradient(black, black) right 12px top 22px / 16px 24px no-repeat,
+    linear-gradient(black, black) center top 18px / 24px 18px no-repeat;
+  border-radius: 8px;
+}
+
+/* LAPORAN = kertas */
+.report {
+  width: 75px;
+  height: 95px;
+}
+
+.report::before {
+  content: "";
+  position: absolute;
+  width: 45px;
+  height: 4px;
+  background: white;
+  top: 18px;
+  left: 15px;
+  box-shadow:
+    0 15px white,
+    0 30px white,
+    0 45px white;
+}

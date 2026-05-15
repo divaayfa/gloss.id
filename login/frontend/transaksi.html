@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transaksi</title>
+<link rel="stylesheet" href="transaksi.css">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- Sidebar -->
+<aside class="sidebar">
+
+<div class="logo">
+GLOSS.ID <span>★</span>
+</div>
+
+<button class="menu" onclick="goDashboard()">Dashboard</button>
+<button class="menu" onclick="goData()">Data</button>
+<button class="menu" onclick="goKeuangan()">Keuangan</button>
+<button class="menu active" onclick="goTransaksi()">Transaksi</button>
+<button class="menu" onclick="goLaporan()">Laporan</button>
+
+</aside>
+
+<!-- Content -->
+<main class="content">
+
+<div class="topbar">
+<button class="logout">logout</button>
+</div>
+
+<h1>Transaksi Penjualan</h1>
+
+<div class="tools">
+<button onclick="bukaPopup()">Tambah</button>
+</div>
+
+<table>
+
+<thead>
+<tr>
+<th>No</th>
+<th>Tanggal</th>
+<th>Nama Barang</th>
+<th>Jumlah</th>
+<th>Edit</th>
+<th>Delete</th>
+</tr>
+</thead>
+
+<tbody id="tbody"></tbody>
+
+</table>
+
+</main>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+
+<div class="popup-box">
+
+<h2>Tambah Transaksi</h2>
+
+<input type="number" id="no" placeholder="No">
+<input type="date" id="tanggal">
+<input type="text" id="nama" placeholder="Nama Barang">
+<input type="number" id="jumlah" placeholder="Jumlah">
+
+<div class="popup-btn">
+<button onclick="simpanData()">Simpan</button>
+<button onclick="tutupPopup()">Batal</button>
+</div>
+
+</div>
+
+</div>
+
+<script src="transaksi.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            GLOSS.ID <span>★</span>
+        </div>
+
+        <button class="menu active" onclick="goDashboard()">Dashboard</button>
+        <button class="menu" onclick="goData()">Data</button>
+        <button class="menu" onclick="goKeuangan()">Keuangan</button>
+        <button class="menu" onclick="goTransaksi()">Transaksi</button>
+        <button class="menu" onclick="goLaporan()">Laporan</button>
+
+    </aside>
+
+    <!-- Content -->
+    <main class="content">
+
+        <div class="topbar">
+            <button class="logout">Logout</button>
+        </div>
+
+        <h1>Dashboard</h1>
+
+        <section class="grid">
+
+            <!-- DATA -->
+            <div class="card" onclick="goData()">
+                <div class="icon box"></div>
+                <h2>Data</h2>
+            </div>
+
+            <!-- KEUANGAN -->
+            <div class="card" onclick="goKeuangan()">
+                <div class="icon wallet"></div>
+                <h2>Keuangan</h2>
+            </div>
+
+            <!-- TRANSAKSI -->
+            <div class="card" onclick="goTransaksi()">
+                <div class="icon cart"></div>
+                <h2>Transaksi</h2>
+            </div>
+
+            <!-- LAPORAN -->
+            <div class="card" onclick="goLaporan()">
+                <div class="icon report"></div>
+                <h2>Laporan</h2>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

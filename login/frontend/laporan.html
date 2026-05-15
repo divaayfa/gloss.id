@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan</title>
+<link rel="stylesheet" href="transaksi.css">
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<!-- Sidebar -->
+<aside class="sidebar">
+
+<div class="logo">GLOSS.ID ★</div>
+
+<button class="menu" onclick="goDashboard()">Dashboard</button>
+<button class="menu" onclick="goData()">Data</button>
+<button class="menu" onclick="goKeuangan()">Keuangan</button>
+<button class="menu" onclick="goTransaksi()">Transaksi</button>
+<button class="menu active" onclick="goLaporan()">Laporan</button>
+
+</aside>
+
+<!-- Content -->
+<main class="content">
+
+<div class="topbar">
+<button class="logout">logout</button>
+</div>
+
+<h1>Laporan Penjualan</h1>
+
+<div class="tools">
+<button onclick="filterHari()">Per Hari</button>
+<button onclick="filterMinggu()">Per Minggu</button>
+<button onclick="filterBulan()">Per Bulan</button>
+</div>
+
+<table>
+
+<thead>
+<tr>
+<th>No</th>
+<th>Tanggal</th>
+<th>Nama Barang</th>
+<th>Jumlah</th>
+</tr>
+</thead>
+
+<tbody id="tbody"></tbody>
+
+</table>
+
+</main>
+
+</div>
+
+<script src="laporan.js"></script>
+</body>
+</html>
