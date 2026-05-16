@@ -19,26 +19,18 @@ const pool = new Pool({
   },
 });
 
-// ================= ROUTES =================
-const authRoutes = require('./routes/auth');
-const reportRoutes = require('./routes/report');
-
-app.use('/api', authRoutes);
-app.use('/api', reportRoutes);
-
 // ================= HOME =================
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// ================= TEST ROUTE =================
+// ================= TEST =================
 app.get('/test', (req, res) => {
   res.send('WEB OK');
 });
 
-
-// ================= LOGIN (OPTIONAL FIX TANPA HAPUS AUTH ROUTES) =================
-// ini hanya fallback kalau authRoutes belum jalan
+// ================= LOGIN (FIX UTAMA) =================
+// pakai ini biar tidak 404 di Railway
 app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -59,13 +51,10 @@ app.post('/login', async (req, res) => {
   }
 });
 
-
 // ================= BARANG =================
 app.get('/barang', async (req, res) => {
   try {
-    const result = await pool.query(
-      'SELECT * FROM barang ORDER BY id ASC'
-    );
+    const result = await pool.query('SELECT * FROM barang ORDER BY id ASC');
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -75,9 +64,7 @@ app.get('/barang', async (req, res) => {
 // ================= KEUANGAN =================
 app.get('/keuangan', async (req, res) => {
   try {
-    const result = await pool.query(
-      'SELECT * FROM keuangan ORDER BY id DESC'
-    );
+    const result = await pool.query('SELECT * FROM keuangan ORDER BY id DESC');
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -87,9 +74,7 @@ app.get('/keuangan', async (req, res) => {
 // ================= TRANSAKSI =================
 app.get('/transaksi', async (req, res) => {
   try {
-    const result = await pool.query(
-      'SELECT * FROM transaksi ORDER BY id DESC'
-    );
+    const result = await pool.query('SELECT * FROM transaksi ORDER BY id DESC');
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -113,11 +98,7 @@ app.post('/transaksi', async (req, res) => {
 
 app.delete('/transaksi/:id', async (req, res) => {
   try {
-    await pool.query(
-      'DELETE FROM transaksi WHERE id=$1',
-      [req.params.id]
-    );
-
+    await pool.query('DELETE FROM transaksi WHERE id=$1', [req.params.id]);
     res.json({ message: 'deleted' });
   } catch (err) {
     res.status(500).json({ error: err.message });
