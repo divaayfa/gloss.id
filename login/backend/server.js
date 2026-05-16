@@ -1,19 +1,22 @@
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
+const path = require('path');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// ================= DB =================
+// ================= FRONTEND =================
+app.use(express.static(path.join(__dirname, '../../public')));
+
+// ================= DATABASE =================
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'glossdb',
-  password: 'Diva2912',
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 // ================= LOGIN =================
@@ -37,8 +40,12 @@ app.post('/login', async (req, res) => {
 // ================= BARANG =================
 app.get('/barang', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM barang ORDER BY id ASC');
+    const result = await pool.query(
+      'SELECT * FROM barang ORDER BY id ASC'
+    );
+
     res.json(result.rows);
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -47,8 +54,12 @@ app.get('/barang', async (req, res) => {
 // ================= KEUANGAN =================
 app.get('/keuangan', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM keuangan ORDER BY id DESC');
+    const result = await pool.query(
+      'SELECT * FROM keuangan ORDER BY id DESC'
+    );
+
     res.json(result.rows);
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -62,7 +73,9 @@ app.get('/transaksi', async (req, res) => {
     const result = await pool.query(
       'SELECT * FROM transaksi ORDER BY id DESC'
     );
+
     res.json(result.rows);
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -94,7 +107,10 @@ app.delete('/transaksi/:id', async (req, res) => {
   try {
     const { id } = req.params;
 
-    await pool.query('DELETE FROM transaksi WHERE id=$1', [id]);
+    await pool.query(
+      'DELETE FROM transaksi WHERE id=$1',
+      [id]
+    );
 
     res.json({ message: "deleted" });
 
@@ -122,6 +138,6 @@ app.put('/transaksi/:id', async (req, res) => {
 });
 
 // ================= START =================
-app.listen(3000, () => {
-  console.log("Server running di http://localhost:3000");
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server running');
 });
