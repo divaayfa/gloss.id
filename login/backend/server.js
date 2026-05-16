@@ -31,11 +31,18 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// ================= TEST ROUTE =================
-app.get('/test', (req, res) => {
-  res.send('WEB OK 🚀');
-});
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
 
+  if (username === 'admin' && password === 'gloss.id') {
+    return res.json({ success: true });
+  }
+
+  return res.json({
+    success: false,
+    message: 'Login gagal'
+  });
+});
 // ================= BARANG =================
 app.get('/barang', async (req, res) => {
   try {

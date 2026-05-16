@@ -11,23 +11,24 @@ async function login() {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        username,
-        password
-      })
+      body: JSON.stringify({ username, password })
     });
 
     const data = await response.json();
 
     if (data.success) {
       msg.innerHTML = "Login berhasil";
-      window.location.href = "dashboard.html";
+
+      setTimeout(() => {
+        window.location.href = "/dashboard.html";
+      }, 1000);
+
     } else {
       msg.innerHTML = data.message;
     }
 
   } catch (error) {
-    console.error(error);
+    console.log(error);
     msg.innerHTML = "Server tidak tersambung";
   }
 }
