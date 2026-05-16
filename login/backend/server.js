@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 // ================= FRONTEND =================
-app.use(express.static(path.join(__dirname, '../../public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // ================= DATABASE =================
 const pool = new Pool({
@@ -21,7 +21,9 @@ const pool = new Pool({
 
 // ================= HOME =================
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public/index.html'));
+  res.sendFile(
+    path.join(__dirname, '..', 'public', 'index.html')
+  );
 });
 
 // ================= LOGIN =================
@@ -52,6 +54,7 @@ app.get('/barang', async (req, res) => {
     res.json(result.rows);
 
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -66,6 +69,7 @@ app.get('/keuangan', async (req, res) => {
     res.json(result.rows);
 
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -82,6 +86,7 @@ app.get('/transaksi', async (req, res) => {
     res.json(result.rows);
 
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -99,7 +104,7 @@ app.post('/transaksi', async (req, res) => {
       [no, tanggal, nama, jumlah]
     );
 
-    res.json({ message: "OK" });
+    res.json({ message: 'OK' });
 
   } catch (err) {
     console.log(err);
@@ -117,9 +122,10 @@ app.delete('/transaksi/:id', async (req, res) => {
       [id]
     );
 
-    res.json({ message: "deleted" });
+    res.json({ message: 'deleted' });
 
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -135,9 +141,10 @@ app.put('/transaksi/:id', async (req, res) => {
       [no, tanggal, nama, jumlah, id]
     );
 
-    res.json({ message: "updated" });
+    res.json({ message: 'updated' });
 
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
