@@ -6,7 +6,7 @@ async function login() {
 
   try {
 
-    const response = await fetch("/login", {
+    const response = await fetch("https://YOUR-BACKEND.up.railway.app/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -20,7 +20,7 @@ async function login() {
       msg.innerHTML = "Login berhasil";
 
       setTimeout(() => {
-        window.location.href = "/dashboard.html";
+        window.location.href = "dashboard.html";
       }, 1000);
 
     } else {
