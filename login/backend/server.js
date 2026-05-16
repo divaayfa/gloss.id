@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 // ================= FRONTEND =================
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ================= DATABASE =================
 const pool = new Pool({
@@ -28,7 +28,7 @@ app.use('/api', reportRoutes);
 
 // ================= HOME =================
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // ================= TEST ROUTE =================
