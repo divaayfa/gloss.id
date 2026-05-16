@@ -1,7 +1,7 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
-const path = require('path');
 
 const app = express();
 
@@ -17,6 +17,11 @@ const pool = new Pool({
   ssl: {
     rejectUnauthorized: false,
   },
+});
+
+// ================= HOME =================
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/index.html'));
 });
 
 // ================= LOGIN =================
