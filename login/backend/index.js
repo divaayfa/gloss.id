@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const cors = require('cors');
 
@@ -6,21 +7,33 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const authRoutes = require('./routes/auth');
+// frontend
+app.use(express.static(path.join(__dirname, '../public')));
 
-// route utama
-app.get('/', (req, res) => {
-  res.send('Server jalan!');
+// login langsung di server
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  if (username === 'admin' && password === 'gloss.id') {
+    return res.json({
+      success: true,
+      message: 'Login berhasil'
+    });
+  }
+
+  res.json({
+    success: false,
+    message: 'Username / password salah'
+  });
 });
 
-// route login
-app.use('/api', authRoutes);
-
-const reportRoutes = require('./routes/report');
-app.use('/api', reportRoutes);
+// home
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Server jalan di port ${PORT}`);
+  console.log("Server jalan di port:", PORT);
 });
