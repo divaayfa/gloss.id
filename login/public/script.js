@@ -1,34 +1,22 @@
-async function login() {
+const API_URL = "https://glossid.up.railway.app";
 
+async function login() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
-  const msg = document.getElementById("msg");
 
-  try {
+  const res = await fetch(`${API_URL}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ username, password })
+  });
 
-    const response = await fetch("https://YOUR-BACKEND.up.railway.app/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ username, password })
-    });
+  const data = await res.json();
 
-    const data = await response.json();
-
-    if (data.success) {
-      msg.innerHTML = "Login berhasil";
-
-      setTimeout(() => {
-        window.location.href = "dashboard.html";
-      }, 1000);
-
-    } else {
-      msg.innerHTML = data.message;
-    }
-
-  } catch (error) {
-    console.log(error);
-    msg.innerHTML = "Server tidak tersambung";
+  if (data.success) {
+    window.location.href = "/dashboard.html";
+  } else {
+    document.getElementById("msg").innerText = data.message;
   }
 }

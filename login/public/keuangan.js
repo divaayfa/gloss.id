@@ -18,7 +18,7 @@ function tutupPopup(){
 // ================= LOAD DATA =================
 async function loadKeuangan(){
 
-    const res = await fetch("http://localhost:3000/keuangan");
+    const res = await fetch(API_URL + "/keuangan");
     const data = await res.json();
 
     render(data);
@@ -51,7 +51,7 @@ async function simpanData(){
     const jumlah = document.getElementById("jumlahBarang").value;
     const harga = document.getElementById("hargaBarang").value;
 
-    await fetch("http://localhost:3000/keuangan", {
+    await fetch(API_URL + "/keuangan", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

@@ -25,14 +25,13 @@ let mode = "tambah";
 let editId = null;
 
 // ================= LOAD DATA =================
+const API_URL = "https://glossid.up.railway.app";
+
 async function loadBarang(){
-
     try {
-        const res = await fetch("http://localhost:3000/barang");
+        const res = await fetch(API_URL + "/barang");
         const data = await res.json();
-
         render(data);
-
     } catch (error) {
         console.log(error);
     }
@@ -114,7 +113,7 @@ async function simpanBarang(){
 
         if(mode === "tambah"){
 
-            await fetch("http://localhost:3000/barang", {
+            await fetch(API_URL + "/barang", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -124,7 +123,7 @@ async function simpanBarang(){
 
         } else {
 
-            await fetch("http://localhost:3000/barang/" + editId, {
+            await fetch(API_URL + "/barang/" + editId, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -149,7 +148,7 @@ async function hapusBarang(id){
 
     try {
 
-        await fetch("http://localhost:3000/barang/" + id, {
+        await fetch(API_URL + "/barang/" + id, {
             method: "DELETE"
         });
 
@@ -180,7 +179,7 @@ async function searchBarang(){
 
     try {
 
-        const res = await fetch("http://localhost:3000/barang");
+        const res = await fetch(API_URL + "/barang");
         const data = await res.json();
 
         const hasil = data.filter(item =>

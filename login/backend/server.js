@@ -33,8 +33,32 @@ app.get('/', (req, res) => {
 
 // ================= TEST ROUTE =================
 app.get('/test', (req, res) => {
-  res.send('WEB OK 🚀');
+  res.send('WEB OK');
 });
+
+
+// ================= LOGIN (OPTIONAL FIX TANPA HAPUS AUTH ROUTES) =================
+// ini hanya fallback kalau authRoutes belum jalan
+app.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const result = await pool.query(
+      'SELECT * FROM users WHERE username=$1 AND password=$2',
+      [username, password]
+    );
+
+    if (result.rows.length > 0) {
+      return res.json({ success: true });
+    } else {
+      return res.json({ success: false, message: "Username / password salah" });
+    }
+
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 
 // ================= BARANG =================
 app.get('/barang', async (req, res) => {
@@ -121,4 +145,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Server jalan di port:", PORT);
 });
-

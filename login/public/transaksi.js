@@ -35,7 +35,6 @@ function render(data){
 
         html += `
         <tr>
-
             <td>${index + 1}</td>
             <td>${item.tanggal ? item.tanggal.split("T")[0] : ""}</td>
             <td>${item.nama}</td>
@@ -45,7 +44,6 @@ function render(data){
                 <button class="icon-btn"
                 onclick="editData(${item.id}, ${item.no}, '${item.tanggal}', '${item.nama}', ${item.jumlah})">
 
-                    <!-- ICON PENSIL -->
                     <svg width="18" height="18" viewBox="0 0 24 24">
                         <path d="M3 17.25V21h3.75L19.81 7.94l-3.75-3.75L3 17.25z" fill="black"/>
                         <path d="M20.71 6.04a1 1 0 0 0 0-1.41L18.37 2.29a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="black"/>
@@ -58,7 +56,6 @@ function render(data){
                 <button class="icon-btn"
                 onclick="hapusData(${item.id})">
 
-                    <!-- ICON TRASH -->
                     <svg width="18" height="18" viewBox="0 0 24 24">
                         <path d="M3 6h18" stroke="black" stroke-width="2"/>
                         <path d="M8 6V4h8v2" stroke="black" stroke-width="2"/>
@@ -68,7 +65,6 @@ function render(data){
 
                 </button>
             </td>
-
         </tr>
         `;
     });
@@ -104,7 +100,7 @@ async function hapusData(id){
     loadTransaksi();
 }
 
-// ================= EDIT =================
+// ================= EDIT (FIX) =================
 async function editData(id, no, tanggal, nama, jumlah){
 
     const newNo = prompt("No", no);
@@ -113,13 +109,13 @@ async function editData(id, no, tanggal, nama, jumlah){
     const newJumlah = prompt("Jumlah", jumlah);
 
     await fetch("http://localhost:3000/transaksi/" + id, {
-        method: "POST",
+        method: "PUT", // 🔥 FIX DI SINI
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify({
-            no:Number(newNo),
-            tanggal:newTanggal,
-            nama:newNama,
-            jumlah:Number(newJumlah)
+            no: Number(newNo),
+            tanggal: newTanggal,
+            nama: newNama,
+            jumlah: Number(newJumlah)
         })
     });
 
