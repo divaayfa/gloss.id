@@ -150,6 +150,8 @@ app.put('/transaksi/:id', async (req, res) => {
 });
 
 // ================= START =================
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Server running');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("Server jalan di port:", PORT);
 });
