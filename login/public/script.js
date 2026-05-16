@@ -6,7 +6,7 @@ async function login() {
 
   try {
 
-    const response = await fetch("http://localhost:3000/login", {
+    const response = await fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -25,7 +25,7 @@ async function login() {
       msg.innerHTML = "Login berhasil";
       window.location.href = "dashboard.html";
     } else {
-      msg.innerHTML = data.message;
+      msg.innerHTML = data.message || "Login gagal";
     }
 
   } catch (error) {
