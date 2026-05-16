@@ -19,29 +19,21 @@ const pool = new Pool({
   },
 });
 
+// ================= ROUTES =================
+const authRoutes = require('./routes/auth');
+const reportRoutes = require('./routes/report');
+
+app.use('/api', authRoutes);
+app.use('/api', reportRoutes);
+
 // ================= HOME =================
 app.get('/', (req, res) => {
-  res.sendFile(
-    path.join(__dirname, '..', 'public', 'index.html')
-  );
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
-// ================= LOGIN =================
-app.post('/login', async (req, res) => {
-  try {
-    const { username, password } = req.body;
-
-    const result = await pool.query(
-      'SELECT * FROM users WHERE username=$1 AND password=$2',
-      [username, password]
-    );
-
-    res.json({ success: result.rows.length > 0 });
-
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: err.message });
-  }
+// ================= TEST ROUTE =================
+app.get('/test', (req, res) => {
+  res.send('WEB OK 🚀');
 });
 
 // ================= BARANG =================
@@ -50,11 +42,8 @@ app.get('/barang', async (req, res) => {
     const result = await pool.query(
       'SELECT * FROM barang ORDER BY id ASC'
     );
-
     res.json(result.rows);
-
   } catch (err) {
-    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -65,86 +54,63 @@ app.get('/keuangan', async (req, res) => {
     const result = await pool.query(
       'SELECT * FROM keuangan ORDER BY id DESC'
     );
-
     res.json(result.rows);
-
   } catch (err) {
-    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
 
 // ================= TRANSAKSI =================
-
-// GET
 app.get('/transaksi', async (req, res) => {
   try {
     const result = await pool.query(
       'SELECT * FROM transaksi ORDER BY id DESC'
     );
-
     res.json(result.rows);
-
   } catch (err) {
-    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// POST
 app.post('/transaksi', async (req, res) => {
   try {
     let { no, tanggal, nama, jumlah } = req.body;
 
-    no = Number(no);
-    jumlah = Number(jumlah);
-
     await pool.query(
       'INSERT INTO transaksi (no, tanggal, nama, jumlah) VALUES ($1,$2,$3,$4)',
-      [no, tanggal, nama, jumlah]
+      [Number(no), tanggal, nama, Number(jumlah)]
     );
 
     res.json({ message: 'OK' });
-
   } catch (err) {
-    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// DELETE
 app.delete('/transaksi/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-
     await pool.query(
       'DELETE FROM transaksi WHERE id=$1',
-      [id]
+      [req.params.id]
     );
 
     res.json({ message: 'deleted' });
-
   } catch (err) {
-    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// PUT
 app.put('/transaksi/:id', async (req, res) => {
   try {
-    const { id } = req.params;
     const { no, tanggal, nama, jumlah } = req.body;
 
     await pool.query(
       'UPDATE transaksi SET no=$1, tanggal=$2, nama=$3, jumlah=$4 WHERE id=$5',
-      [no, tanggal, nama, jumlah, id]
+      [no, tanggal, nama, jumlah, req.params.id]
     );
 
     res.json({ message: 'updated' });
-
   } catch (err) {
-    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
