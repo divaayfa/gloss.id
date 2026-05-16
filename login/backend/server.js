@@ -122,22 +122,3 @@ app.listen(PORT, () => {
   console.log("Server jalan di port:", PORT);
 });
 
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    const result = await pool.query(
-      'SELECT * FROM users WHERE username=$1 AND password=$2',
-      [username, password]
-    );
-
-    if (result.rows.length > 0) {
-      res.json({ success: true });
-    } else {
-      res.json({ success: false, message: "Username / password salah" });
-    }
-
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-});
